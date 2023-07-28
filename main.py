@@ -1,2 +1,5 @@
-if __name__ == '__main__':
-    print('PyCharm')
+from PyQt5.QtWidgets import QApplication
+
+app = QApplication([])
+
+app.exec()
