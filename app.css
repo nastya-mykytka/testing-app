@@ -38,3 +38,67 @@ QPushButton#continue_button:hover {
     color: #d8e3da;
     width: 300px;
 }
+
+/* Topic styles*/
+
+QLabel#topik_label {
+    color: #30f107;
+    font-size: 50px;
+}
+
+
+QPushButton#python_button {
+    background-color: #0d6ab7;
+    color: #000;
+    width: 300px;
+    height: 200px;
+    font-size: 40px;
+    border-radius: 15px;
+}
+
+QPushButton#python_button:hover {
+    background-color: #062a48;
+    color: #bda611;
+}
+
+QPushButton#math_button {
+    background-color: #eaa63f;
+    color: #000;
+    width: 300px;
+    height: 200px;
+    font-size: 40px;
+    border-radius: 15px;
+}
+
+QPushButton#math_button:hover {
+    background-color: #483106;
+    color: #fff;
+}
+
+QPushButton#english_button {
+    background-color: #ea184b;
+    color: #000;
+    width: 300px;
+    height: 200px;
+    font-size: 40px;
+    border-radius: 15px;
+}
+
+QPushButton#english_button:hover {
+    background-color: #9d0a2e;
+    color: #fff;
+}
+
+QPushButton#geography_button {
+    background-color: #35d508;
+    color: #000;
+    width: 300px;
+    height: 200px;
+    font-size: 40px;
+    border-radius: 15px;
+}
+
+QPushButton#geography_button:hover {
+    background-color: #1d6509;
+    color: #EBF02F;
+}

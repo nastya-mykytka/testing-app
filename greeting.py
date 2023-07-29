@@ -5,13 +5,12 @@ from PyQt5.QtWidgets import (
     QVBoxLayout,
     QLabel,
 )
+from window import Window
 
 
-window_greeting = QWidget()
-window_greeting.setWindowTitle('Greeting')
-window_greeting.resize(800, 600)
+window_greeting = Window('Привітання')
 
-greeting_title = QLabel('Вітаємо тебе на моїй платформі для тестування!')
+greeting_title = QLabel('Вітаю тебе на моїй платформі для тестування!')
 greeting_title.setObjectName('greeting_title')
 greeting_sub_title = QLabel('Щоб почати тестування нажми кнопку Продовжити')
 greeting_sub_title.setObjectName('greeting_sub_title')
