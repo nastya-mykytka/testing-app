@@ -1,5 +1,5 @@
 from PyQt5.QtCore import Qt
-from PyQt5.QtWidgets import QWidget
+from PyQt5.QtWidgets import QWidget, QDesktopWidget
 
 
 class Window(QWidget):
@@ -7,3 +7,10 @@ class Window(QWidget):
         super().__init__()
         self.setWindowTitle(title)
         self.resize(size_x, size_y)
+        self.center()
+
+    def center(self):
+        qr = self.frameGeometry()
+        cp = QDesktopWidget().availableGeometry().center()
+        qr.moveCenter(cp)
+        self.move(qr.topLeft())

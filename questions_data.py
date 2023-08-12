@@ -1,7 +1,7 @@
 question_python_data = [
 
     {
-        "question": "Як правильно?",
+        "question": "Як правильно вивести ?",
         "right": "print('Привіт')",
         "wrong": [
             "print(Привіт)",
@@ -88,12 +88,12 @@ question_english_data = [
         ]
     },
     {
-        "question": "Дієслова що вставляються до займеників she, he, it:",
-        "right": "Is",
+        "question": "Як буде Собака?",
+        "right": "Dog",
         "wrong": [
-            "Am",
-            "Are",
-            "Fem",
+            "Cat",
+            "Rabbit",
+            "Turtle",
         ]
     },
     {

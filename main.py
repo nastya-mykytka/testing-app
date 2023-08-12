@@ -2,7 +2,7 @@ from random import shuffle
 
 from admin import AdminWindow
 from application import app
-from data import Form, FormView
+from data import Form, FormView, AnswerCheck
 from greeting import window_greeting, continue_button
 from questions_data import question_python_data, question_math_data, question_geography_data, question_english_data
 from testing import (
@@ -18,6 +18,7 @@ from testing import (
     testing_answer_button
 )
 from topic import window_topic, python_button, math_button, geography_button, english_button
+from dialog_test_result import TestResulDialog
 
 window_greeting.show()
 
@@ -26,110 +27,92 @@ data_list = []
 current_question_index = 0
 
 form = Form()
-form_view = None
-
-
-def create_form_view():
-    global form_view
-    form_view = FormView(
-        form,
-        testing_question_label,
-        radio_btn_1,
-        radio_btn_2,
-        radio_btn_3,
-        radio_btn_4,
-    )
-
-
-create_form_view()
-
+form_view = FormView(form, testing_question_label, radio_btn_1, radio_btn_2, radio_btn_3, radio_btn_4)
+form_answer_check = AnswerCheck(form_view, testing_question_label, radio_btn_1, radio_btn_2, radio_btn_3, radio_btn_4)
 admin_window = AdminWindow(data_list, testing_window)
+test_result_dialog = TestResulDialog(None, form.correct, form.wrong)
 
-
-def load_questions(topic):
+def load_questions(topic_key):
     global data_list
-    if topic == 'python':
+    if topic_key == 'python':
         data_list = question_python_data
-    elif topic == 'math':
+    elif topic_key == 'math':
         data_list = question_math_data
-    elif topic == 'english':
+    elif topic_key == 'english':
         data_list = question_english_data
-    elif topic == 'geography':
+    elif topic_key == 'geography':
         data_list = question_geography_data
 
 
-def create_form_instance(index=0):
-    global form
+def set_form_instance():
+    index = form.current_question_index
     questions_list = [
         data_list[index]['right'],
         data_list[index]['wrong'][0],
         data_list[index]['wrong'][1],
         data_list[index]['wrong'][2]
     ]
-    shuffle(questions_list)
-    form = Form(
+    # shuffle(questions_list)
+    form.set_form_data(
         data_list[index]['question'],
         questions_list[0],
         questions_list[1],
         questions_list[2],
         questions_list[3],
     )
-    return form
 
 
 def click_continue_button():
     window_greeting.hide()
     window_topic.show()
-    form_view.show()
-
-
-def update_admin_content_list():
-    admin_window.update_content_list(data_list)
 
 
 def click_python_button():
-    global data_list
     load_questions('python')
-    create_form_instance()
-    form_view.change(form)
+    set_form_instance()
+    form_view.set_form_model(form)
     form_view.show()
     window_topic.hide()
     testing_window.show()
-    admin_window.update_content_list(data_list)
 
 
 def click_math_button():
-    global data_list
     load_questions('math')
-    create_form_instance()
-    form_view.change(form)
+    set_form_instance()
+    form_view.set_form_model(form)
     form_view.show()
     window_topic.hide()
     testing_window.show()
 
 
 def click_english_button():
-    global data_list
     load_questions('english')
-    create_form_instance()
-    form_view.change(form)
+    set_form_instance()
+    form_view.set_form_model(form)
     form_view.show()
     window_topic.hide()
     testing_window.show()
 
 
 def click_geography_button():
-    global data_list
     load_questions('geography')
-    create_form_instance()
-    form_view.change(form)
+    set_form_instance()
+    form_view.set_form_model(form)
     form_view.show()
     window_topic.hide()
     testing_window.show()
 
 
-def click_back_python_button():
+def reset_test():
+    testing_answer_button.setText('Відповісти')
+    form.current_question_index = 0
+    form.correct = 0
+    form.wrong = 0
     reset_select_question()
+
+
+def click_back_python_button():
+    reset_test()
     testing_window.hide()
     window_topic.show()
 
@@ -141,26 +124,44 @@ def click_menu_python_button():
     admin_window.show()
 
 
-def click_start_test():
-    reset_select_question()
-    admin_window.hide()
-    testing_window.show()
+def test_result_dialog_closed():
+    testing_window.hide()
+    reset_test()
+    window_greeting.show()
 
 
 def show_test_result():
-    print('Show result')
+    test_result_dialog.calculate_result(form.correct, len(data_list))
+    test_result_dialog.dialog_closed.connect(test_result_dialog_closed)  # Connect the signal to the function
+    test_result_dialog.exec()
+
+
+def start_test():
+    reset_test()
+    admin_window.hide()
+    set_form_instance()
+    form_view.set_form_model(form)
+    form_view.show()
+    testing_window.show()
 
 
 def click_testing_answer_button():
-    global current_question_index
-    if current_question_index + 1 < len(data_list):
-        current_question_index += 1
-        create_form_instance(current_question_index)
-        form_view.change(form)
-        testing_answer_button.setText('Відповісти')
-    else:
-        testing_answer_button.setText('Результат теста')
-        show_test_result()
+    if radio_btn_1.isChecked() or radio_btn_2.isChecked() or radio_btn_3.isChecked() or radio_btn_4.isChecked():
+        if form.current_question_index == len(data_list) - 1:
+            form_answer_check.set_form_model(form)
+            form_answer_check.check()
+            show_test_result()
+            return
+
+        form_answer_check.set_form_model(form)
+        form_answer_check.check()
+        reset_select_question()
+        set_form_instance()
+        form_view.set_form_model(form)
+        form_view.show()
+
+        if form.current_question_index + 1 == len(data_list):
+            testing_answer_button.setText('Результат теста')
 
 
 continue_button.clicked.connect(click_continue_button)
@@ -173,5 +174,8 @@ back_to_topic_button.clicked.connect(click_back_python_button)
 testing_menu_button.clicked.connect(click_menu_python_button)
 testing_answer_button.clicked.connect(click_testing_answer_button)
 
-app.exec()
+admin_window.start_test_button.clicked.connect(start_test)
 
+test_result_dialog.dialog_closed.connect(test_result_dialog_closed)
+
+app.exec()

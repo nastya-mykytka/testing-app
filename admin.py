@@ -19,14 +19,14 @@ class AdminWindow(Window):
 
         self.content_layout = QVBoxLayout()
 
-        start_test_button = QPushButton('Почати тест')
-        start_test_button.setObjectName('start_test_button')
+        self.start_test_button = QPushButton('Почати тест')
+        self.start_test_button.setObjectName('start_test_button')
 
         add_test_button = QPushButton('Додати питання')
         add_test_button.setObjectName('add_test_button')
 
         footer_button_layout = QHBoxLayout()
-        footer_button_layout.addWidget(start_test_button,
+        footer_button_layout.addWidget(self.start_test_button,
                                        alignment=Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignCenter)
         footer_button_layout.addWidget(add_test_button,
                                        alignment=Qt.AlignmentFlag.AlignBottom | Qt.AlignmentFlag.AlignCenter)
@@ -38,7 +38,6 @@ class AdminWindow(Window):
         self.setLayout(main_admin_layout)
 
         add_test_button.clicked.connect(self.show_add_question_dialog)
-        start_test_button.clicked.connect(self.start_test)
 
     def remove_layout(self, layout):
         # Deleting the layout and its widgets to free up memory
@@ -60,7 +59,6 @@ class AdminWindow(Window):
     def update_content_list(self, data_list=[]):
         self.remove_layout(self.content_layout)
 
-        # Create QLabel, Edit Button, and Remove Button for each question
         for index, question_data in enumerate(data_list):
             question_item = QLabel(question_data["question"])
             question_item.setObjectName('question_item')
@@ -85,10 +83,6 @@ class AdminWindow(Window):
         dialog.questionAdded.connect(lambda new_question: self.handle_new_question(new_question))
         if dialog.exec_() == QDialog.Accepted:
             pass
-
-    def start_test(self):
-        self.hide()
-        self.testing_window.show()
 
     def show_edit_question_dialog(self, data, index):
         dialog = AddQuestionDialog(

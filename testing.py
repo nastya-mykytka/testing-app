@@ -3,7 +3,10 @@ from PyQt5.QtWidgets import (
     QPushButton,
     QVBoxLayout,
     QLabel,
-    QHBoxLayout, QRadioButton, QGroupBox, QButtonGroup,
+    QHBoxLayout,
+    QRadioButton,
+    QGroupBox,
+    QButtonGroup,
 )
 
 from window import Window
@@ -85,3 +88,4 @@ def reset_select_question():
     radio_btn_2.setChecked(False)
     radio_btn_3.setChecked(False)
     radio_btn_4.setChecked(False)
+    radio_group.setExclusive(True)
