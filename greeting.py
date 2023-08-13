@@ -1,13 +1,12 @@
 from PyQt5.QtCore import Qt
 from PyQt5.QtWidgets import (
-    QWidget,
     QPushButton,
     QVBoxLayout,
     QLabel,
 
 )
-from window import Window
 
+from window import Window
 
 window_greeting = Window('Привітання')
 

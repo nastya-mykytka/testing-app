@@ -53,6 +53,7 @@ def set_form_instance():
         data_list[index]['wrong'][2]
     ]
     # shuffle(questions_list)
+    # потрібно перемішувати разом з віджетами
     form.set_form_data(
         data_list[index]['question'],
         questions_list[0],

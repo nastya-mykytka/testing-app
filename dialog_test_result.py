@@ -50,17 +50,14 @@ class TestResulDialog(QDialog):
         self.setLayout(layout)
 
     def calculate_result(self, correct_count, question_count):
-        # correct_count = int(self.correct_count.text())
-        print(correct_count)
-
         result = (correct_count / question_count) * 100
         self.result.setText('{}%'.format(result))
         if result > 60:
             self.title.setText('Вітаю! Ти пройшов тест')
         else:
-            self.title.setText('На жаль ти не пройшов тест')  # Fixed typo in label text
+            self.title.setText('На жаль ти не пройшов тест')
 
     def closeEvent(self, event):
-        self.dialog_closed.emit()  # Emit the dialog_closed signal when the dialog is closed
+        self.dialog_closed.emit()
         super(TestResulDialog, self).closeEvent(event)
 

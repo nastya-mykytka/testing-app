@@ -163,6 +163,7 @@ QLabel#testing_question_label {
 QRadioButton {
     padding-left: 50px;
     color: #fff;
+    max-width: 400px;
 }
 
 QRadioButton::indicator::unchecked {
