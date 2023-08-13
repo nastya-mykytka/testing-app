@@ -79,39 +79,39 @@ question_math_data = [
 
 question_english_data = [
     {
-        "question": "Як буде Велосипед?",
-        "right": "Bike",
+        "question": "Will Smith __ from America.",
+        "right": "is",
         "wrong": [
-            "Rollers",
-            "Car",
-            "Motorbike",
+            "am",
+            "are",
+            "on",
         ]
     },
     {
-        "question": "Як буде Собака?",
-        "right": "Dog",
+        "question": "__ this T-shirt?",
+        "right": "Do you like",
         "wrong": [
-            "Cat",
-            "Rabbit",
-            "Turtle",
+            "You like",
+            "Do like you",
+            "Are you like",
         ]
     },
     {
-        "question": "Встав слово, I am intrested in .... the guitar",
-        "right": "Playing",
+        "question": "A giraffe is the __ animal in the zoo.",
+        "right": "tallest",
         "wrong": [
-            "Listening",
-            "Watching",
-            "Taking",
+            "taller",
+            "more tall",
+            "the tallest",
         ]
     },
     {
-        "question": "Як буде Кіт?",
-        "right": "Cat",
+        "question": "Summer is __ than spring.",
+        "right": "hotter",
         "wrong": [
-            "Dog",
-            "Rabbit",
-            "Turtle",
+            "the hottest",
+            "hottest",
+            "hot",
         ]
     }
 ]
